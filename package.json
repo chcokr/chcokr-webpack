@@ -8,8 +8,10 @@
   },
   "dependencies": {
     "app-root-path": "^1.0.0",
+    "eval": "^0.1.0",
     "extract-text-webpack-plugin": "^0.5.0",
     "find-root": "^0.1.1",
+    "jsdom": "^3.0.0",
     "lodash.assign": "^3.1.0",
     "lodash.defaults": "^3.0.0",
     "lodash.pick": "^3.1.0",
@@ -31,19 +33,17 @@
     "babel": "*",
     "babel-loader": "*",
     "css-loader": "*",
-    "eval": "*",
-    "jsdom": "^3.0.0",
     "json-loader": "*",
     "postcss": "*",
     "postcss-loader": "*",
     "react": "*",
     "react-hot-loader": "*",
     "react-router": ">=1.0.0-beta1",
+    "stilr": "*",
     "style-loader": "*",
-    "stylus-loader": "*",
     "url-loader": "*",
-    "webpack-dev-server": "*",
-    "yeticss": "*"
+    "webpack": "*",
+    "webpack-dev-server": "*"
   },
   "repository": {
     "type": "git",

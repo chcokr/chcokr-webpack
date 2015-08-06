@@ -176,6 +176,14 @@ module.exports = function (opts) {
       })
     )
 
+    // <chcokr>
+    // TEMP!!
+    config.node = {
+      fs: 'empty' // this makes Autoprefixer work in the browser
+    };
+    // </chcokr>
+
+    // extract in production
     config.module.loaders.push(
       {
         test: /\.css$/,
@@ -189,7 +197,6 @@ module.exports = function (opts) {
         config.module.loaders.push(item.config.production);
       }
     });
-    )
 
     // <chcokr>
     // This allows Stilr extraction
