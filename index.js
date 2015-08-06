@@ -6,10 +6,12 @@ var defaults = require('lodash.defaults')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var getBaseConfig = require('./lib/base-config')
 var getPackage = require('./lib/get-package')
+var optionalLoaders = require('./lib/optional-loaders')
+var isInstalled = require('./lib/is-installed')
 
 // figure out if we're running `webpack` or `webpack-dev-server`
 // we'll use this as the default for `isDev`
-var isDev = process.argv[1].indexOf('webpack-dev-server') !== -1
+var isDev = (process.argv[1] || '').indexOf('webpack-dev-server') !== -1
 
 module.exports = function (opts) {
   // <chcokr>
@@ -110,37 +112,31 @@ module.exports = function (opts) {
       new webpack.NoErrorsPlugin()
     ])
 
-    // add react-hot as module loader
-    config.module.loaders[0].loaders.unshift('react-hot')
+    // add react-hot as module loader if it is installed
+    if (isInstalled('react-hot')) {
+      config.module.loaders[0].loaders.unshift('react-hot')
+    }
+
 
     config.module.loaders.push(
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader!postcss-loader'
-      },
-      {
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
-      },
-      {
-        test: /\.less$/,
-        loader: 'style-loader!css-loader!postcss-loader!less-loader'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader'
-      },
-      {
-        test: /\.sass$/,
-        loader: 'style-loader!css-loader!postcss-loader!sass-loader?indentedSyntax'
       }
-    )
+    );
 
     // <chcokr>
     config.node = {
       fs: 'empty' // this makes Autoprefixer work in the browser
     };
     // </chcokr>
+
+    // Add optional loaders
+    optionalLoaders.forEach(function (item) {
+      if (isInstalled(item.pkg)) {
+        config.module.loaders.push(item.config.dev);
+      }
+    });
 
   } else {
     // clear out output folder if so configured
@@ -180,28 +176,19 @@ module.exports = function (opts) {
       })
     )
 
-    // extract in production
     config.module.loaders.push(
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader')
-      },
-      {
-        test: /\.styl$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!stylus-loader')
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!less-loader')
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader')
-      },
-      {
-        test: /\.sass$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!postcss-loader!sass-loader?indentedSyntax')
       }
+    );
+
+    // Add optional loaders
+    optionalLoaders.forEach(function (item) {
+      if (isInstalled(item.pkg)) {
+        config.module.loaders.push(item.config.production);
+      }
+    });
     )
 
     // <chcokr>
