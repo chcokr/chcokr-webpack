@@ -417,6 +417,12 @@ Beware that this is all highly opinionated and contains a lot of personal prefer
 
 ## Changelog
 
+- 2.12.1
+  - Don't assume `process.argv[1]` exists. This can happen if running via `node -p`, thanks [@eins78](http://github.com/eins78).
+
+- 2.12.0
+  - Don't force install of React or React Hot-Loader only use them and other optional installs if installed. Thanks [@FWeinb](http://github.com/FWeinb)
+
 - 2.11.0
   - Add ability to pass `metaTags` object as a `defaultTempate` option for easily adding `<meta>` tags.
 
