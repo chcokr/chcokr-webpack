@@ -1,7 +1,7 @@
 {
   "name": "chcokr-webpack",
   "description": "Personal fork of hjs-webpack",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "YJ Yang <chcokr@gmail.com>",
   "bugs": {
     "url": "https://github.com/chcokr/chcokr-webpack/issues"
@@ -50,7 +50,7 @@
     "url": "https://github.com/chcokr/chcokr-webpack"
   },
   "scripts": {
-    "prepublish": "babel StylesheetHotLoad.jsx > StylesheetHotLoad.js",
+    "prepublish": "./prepublish.sh",
     "test": "standard"
   },
   "standard": {
