@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import {isElement} from 'react/lib/ReactTestUtils';
 
 export default function stylesheetHotLoad(target, baobabTree) {
 
@@ -14,9 +13,6 @@ export default function stylesheetHotLoad(target, baobabTree) {
     }
 
     render() {
-      if (!isElement(target)) {
-        return null;
-      }
       return React.createElement(target, this.props);
     }
 
