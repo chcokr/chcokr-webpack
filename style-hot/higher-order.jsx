@@ -1,10 +1,20 @@
-import compose from './decorator';
+import React from 'react';
 
-export default function stylesheetHotLoad(baobabTree) {
+export default function stylesheetHotLoad(target, baobabTree) {
 
-  return function (target) {
+  return class StylesheetHotLoadingComponent extends React.Component {
 
-    return compose(target, baobabTree);
+    componentDidMount() {
+      baobabTree.set('stilrLastUpdate', Date.now());
+    }
+
+    componentDidUpdate() {
+      baobabTree.set('stilrLastUpdate', Date.now());
+    }
+
+    render() {
+      return React.createElement(target, this.props);
+    }
 
   };
 
