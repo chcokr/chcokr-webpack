@@ -1,4 +1,4 @@
-import compose from './decorator';
+import compose from './higher-order';
 
 export default function stylesheetHotLoad(baobabTree) {
 
