@@ -1,6 +1,6 @@
 {
   "name": "chcokr-webpack",
-  "description": "Personal fork of hjs-webpack",
+  "description": "[DEPRECATED] Personal fork of hjs-webpack",
   "version": "0.2.6",
   "author": "YJ Yang <chcokr@gmail.com>",
   "bugs": {
